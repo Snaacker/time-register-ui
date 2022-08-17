@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import Card from "antd/lib/card/Card";
+import Link from 'next/link'
 
 function Login() {
   const onFinish = (values: any) => {
@@ -45,7 +46,9 @@ function Login() {
             <Form.Item name="remember" valuePropName="checked">
               <Checkbox>Remember me</Checkbox>
             </Form.Item>
-
+            <Form.Item>
+              <Button type="link" htmlType="button"><Link href="/signup">Sign Up</Link> </Button>
+            </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit">
                 Submit
