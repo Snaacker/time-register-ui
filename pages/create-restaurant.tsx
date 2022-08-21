@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import Card from "antd/lib/card/Card";
 
-function Login() {
+function CreateRestaurant() {
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
@@ -14,7 +14,7 @@ function Login() {
   return (
     <div className="vh-100 row justify-content-center">
       <div className=" col-6 align-self-center">
-        <Card title="Sign Up" style={{ width: 600 }}>
+        <Card title="Create a new restaurant " style={{ width: 600 }}>
           <Form
             name="basic"
             initialValues={{ remember: true }}
@@ -25,41 +25,18 @@ function Login() {
             wrapperCol={{ span: 16 }}
           >
             <Form.Item
-              label="First name"
-              name="firstname"
-              rules={[
-                { required: true, message: "Please input your first name!" },
-              ]}
+              label="Name"
+              name="name"
+              rules={[{ required: true, message: "Name is required" }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
-              label="Last name"
-              name="lastname"
-              rules={[
-                { required: true, message: "Please input your last name!" },
-              ]}
+              label="Address"
+              name="address"
+              rules={[{ required: true, message: "Address is required" }]}
             >
               <Input />
-            </Form.Item>
-            <Form.Item
-              label="Username"
-              name="username"
-              rules={[
-                { required: true, message: "Please input your username!" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                { required: true, message: "Please input your password!" },
-              ]}
-            >
-              <Input.Password />
             </Form.Item>
 
             <Form.Item>
@@ -74,4 +51,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default CreateRestaurant;

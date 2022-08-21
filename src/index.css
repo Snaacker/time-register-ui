@@ -20,3 +20,8 @@ code {
   bottom: 0;
   margin: auto;
 }
+
+
+.login-form-forgot {
+  float: right;
+}

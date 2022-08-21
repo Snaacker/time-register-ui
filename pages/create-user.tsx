@@ -1,8 +1,10 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import Card from "antd/lib/card/Card";
 
-function Login() {
+function CreateUser() {
+  const { Option } = Select;
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
@@ -14,7 +16,7 @@ function Login() {
   return (
     <div className="vh-100 row justify-content-center">
       <div className=" col-6 align-self-center">
-        <Card title="Sign Up" style={{ width: 600 }}>
+        <Card title="Create a new user" style={{ width: 600 }}>
           <Form
             name="basic"
             initialValues={{ remember: true }}
@@ -24,6 +26,19 @@ function Login() {
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 16 }}
           >
+            <Form.Item
+              label="User role"
+              name="userrole"
+              rules={[
+                { required: true, message: "Please input your first name!" },
+              ]}
+            >
+              <Select defaultValue="employee" style={{ width: 120 }}>
+                <Option value="manager">Manager</Option>
+                <Option value="admin">Admin</Option>
+                <Option value="employee">Employee</Option>
+              </Select>
+            </Form.Item>
             <Form.Item
               label="First name"
               name="firstname"
@@ -61,8 +76,30 @@ function Login() {
             >
               <Input.Password />
             </Form.Item>
-
-            <Form.Item>
+            <Form.Item
+              label="Address"
+              name="address"
+              rules={[{ required: true, message: "Please input your address" }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Phone number"
+              name="phoneNumber"
+              rules={[
+                { required: true, message: "Please input your phone number" },
+              ]}
+            >
+              <Input type={"number"} />
+            </Form.Item>
+            <Form.Item
+              label="Email"
+              name="Email"
+              rules={[{ required: true, message: "Please input your Email" }]}
+            >
+              <Input type={"email"} />
+            </Form.Item>
+            <Form.Item className="float-right">
               <Button type="primary" htmlType="submit">
                 Submit
               </Button>
@@ -74,4 +111,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default CreateUser;
