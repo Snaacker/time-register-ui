@@ -14,7 +14,7 @@ function CreateRestaurant() {
   return (
     <div className="vh-100 row justify-content-center">
       <div className=" col-6 align-self-center">
-        <Card title="Create a new restaurant " style={{ width: 600 }}>
+        <Card title="Create a new restaurant ">
           <Form
             name="basic"
             initialValues={{ remember: true }}

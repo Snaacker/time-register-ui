@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import Card from "antd/lib/card/Card";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import Link from "next/link";
 
 function Login() {
   const onFinish = (values: any) => {
@@ -16,7 +15,7 @@ function Login() {
   return (
     <div className="vh-100 row justify-content-center">
       <div className=" col-6 align-self-center">
-        <Card title="Login" style={{ width: 600 }}>
+        <Card title="Login" >
           <Form
             name="normal_login"
             className="login-form"

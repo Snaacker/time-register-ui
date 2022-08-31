@@ -14,7 +14,7 @@ function Login() {
   return (
     <div className="vh-100 row justify-content-center">
       <div className=" col-6 align-self-center">
-        <Card title="Sign Up" style={{ width: 600 }}>
+        <Card title="Sign Up">
           <Form
             name="basic"
             initialValues={{ remember: true }}

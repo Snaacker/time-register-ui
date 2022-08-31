@@ -16,7 +16,7 @@ function CreateUser() {
   return (
     <div className="vh-100 row justify-content-center">
       <div className=" col-6 align-self-center">
-        <Card title="Create a new user" style={{ width: 600 }}>
+        <Card title="Create a new user">
           <Form
             name="basic"
             initialValues={{ remember: true }}
