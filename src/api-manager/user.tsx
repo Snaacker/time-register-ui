@@ -55,6 +55,7 @@ export async function createUser(user: User) {
       {
         headers: {
           Accept: "application/json",
+          'Access-Control-Allow-Origin': 'cors',
         },
       }
     );

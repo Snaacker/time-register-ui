@@ -13,7 +13,7 @@ function Login() {
 
   return (
     <div className="vh-100 row justify-content-center">
-      <div className=" col-6 align-self-center">
+      <div className=" col-lg-6 col-md-8 col-sm-10 col-xs-12 align-self-center">
         <Card title="Sign Up">
           <Form
             name="basic"

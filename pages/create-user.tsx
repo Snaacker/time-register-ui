@@ -1,11 +1,14 @@
 import React from "react";
 import { Button, Form, Input, Select } from "antd";
 import Card from "antd/lib/card/Card";
+import { User } from "../src/type/User";
+import { createUser } from "../src/api-manager/user";
 
 function CreateUser() {
   const { Option } = Select;
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: User) => {
+    createUser(values)
     console.log("Success:", values);
   };
 
@@ -15,7 +18,7 @@ function CreateUser() {
 
   return (
     <div className="vh-100 row justify-content-center">
-      <div className=" col-6 align-self-center">
+      <div className=" col-lg-6 col-md-8 col-sm-10 col-xs-12 align-self-center">
         <Card title="Create a new user">
           <Form
             name="basic"
@@ -28,12 +31,12 @@ function CreateUser() {
           >
             <Form.Item
               label="User role"
-              name="userrole"
+              name="roleName"
               rules={[
-                { required: true, message: "Please input your first name!" },
+                { required: true, message: "Please input your role!" },
               ]}
             >
-              <Select defaultValue="employee" style={{ width: 120 }}>
+              <Select>
                 <Option value="manager">Manager</Option>
                 <Option value="admin">Admin</Option>
                 <Option value="employee">Employee</Option>
@@ -41,7 +44,7 @@ function CreateUser() {
             </Form.Item>
             <Form.Item
               label="First name"
-              name="firstname"
+              name="firstName"
               rules={[
                 { required: true, message: "Please input your first name!" },
               ]}
@@ -50,7 +53,7 @@ function CreateUser() {
             </Form.Item>
             <Form.Item
               label="Last name"
-              name="lastname"
+              name="lastName"
               rules={[
                 { required: true, message: "Please input your last name!" },
               ]}
@@ -59,7 +62,7 @@ function CreateUser() {
             </Form.Item>
             <Form.Item
               label="Username"
-              name="username"
+              name="userName"
               rules={[
                 { required: true, message: "Please input your username!" },
               ]}
@@ -94,7 +97,7 @@ function CreateUser() {
             </Form.Item>
             <Form.Item
               label="Email"
-              name="Email"
+              name="email"
               rules={[{ required: true, message: "Please input your Email" }]}
             >
               <Input type={"email"} />
