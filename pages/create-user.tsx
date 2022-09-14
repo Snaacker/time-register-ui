@@ -37,9 +37,9 @@ function CreateUser() {
               ]}
             >
               <Select>
-                <Option value="manager">Manager</Option>
-                <Option value="admin">Admin</Option>
-                <Option value="employee">Employee</Option>
+                <Option value="MANAGER">Manager</Option>
+                <Option value="ADMIN">Admin</Option>
+                <Option value="EMPLOYEE">Employee</Option>
               </Select>
             </Form.Item>
             <Form.Item
