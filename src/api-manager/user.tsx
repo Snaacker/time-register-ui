@@ -55,7 +55,8 @@ export async function createUser(user: User) {
       {
         headers: {
           Accept: "application/json",
-          'Access-Control-Allow-Origin': 'cors',
+          'Access-Control-Allow-Origin': '*',
+          Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzIwNzI4NSwiaWF0IjoxNjYzMTg5Mjg1fQ.LMLMi5G1YeMV-SE7idu5dC-Hjrrsfqt3M4maeiaPaDfNflrkuOr6KJmdefvzcl5j3mUjRIPNm0_NCn9o8iblPA"
         },
       }
     );

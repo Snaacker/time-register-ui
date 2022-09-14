@@ -2,6 +2,8 @@ import { AppstoreOutlined, HomeOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { UserContext } from "../contexts/userContext";
+
 
 const items = [
   {
@@ -29,13 +31,19 @@ const items = [
     key: "user-management",
     icon: <AppstoreOutlined />,
   },
+  {
+    label: "User Profile",
+    key: "user-profile",
+    icon: <AppstoreOutlined />,
+  },
 ];
 
 const NavBar = () => {
+  const userContext = UserContext;
   const [current, setCurrent] = useState("home");
   const router = useRouter();
   const onClick = (e: any) => {
-    console.log("click ", e);
+    console.log(userContext)
     setCurrent(e.key);
     switch (e.key) {
       case "home":
@@ -52,6 +60,9 @@ const NavBar = () => {
         break;
       case "user-management":
         router.push("user-management");
+        break;
+      case "user-profile":
+        router.push("user-profile");
         break;
       default:
         break;
