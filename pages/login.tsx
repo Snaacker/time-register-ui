@@ -1,12 +1,37 @@
-import React from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import React, { useContext } from "react";
+import { Button, Checkbox, Form, Input, Alert } from "antd";
 import Card from "antd/lib/card/Card";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
+import { User } from "../src/type/User";
+import { UserContext } from "./_app";
+import { useEffect } from "react";
+import { useState } from "react";
+
 function Login() {
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
+  const { state, update } = useContext(UserContext)
+  const [isUserAuthenticated, updateUserAuthStatus] = useState<Boolean>(false)
+  const [isUserCredentialInvalid, updateUserCredentialStatus] = useState<Boolean>(false)
+  const onFinish = async (input: { username: String, password: String }) => {
+
+    if (input.username === "test" && input.password === "test") {
+      let _user: User = { id: "12", roleName: "ADMIN", userName: input.username }
+      update(_user)
+      updateUserCredentialStatus(false)
+      updateUserAuthStatus(true)
+    } else {
+      updateUserAuthStatus(false)
+      updateUserCredentialStatus(true)
+    }
+
+
+    console.log("Success:", input);
   };
+
+  useEffect(() => {
+    console.log("useEffect")
+    console.log(state)
+  }, [state])
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
@@ -16,6 +41,11 @@ function Login() {
     <div className="vh-100 row justify-content-center">
       <div className=" col-lg-6 col-md-8 col-sm-10 col-xs-12 align-self-center">
         <Card title="Login" >
+          {isUserCredentialInvalid ?
+            <div className="pb-3">
+              <Alert message="Username or password is incorrect." type="error" />
+            </div> : null
+          }
           <Form
             name="normal_login"
             className="login-form"

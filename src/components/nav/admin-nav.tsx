@@ -2,7 +2,7 @@ import { AppstoreOutlined, HomeOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { UserContext } from "../contexts/userContext";
+import { UserContext } from "../../contexts/userContext";
 
 
 const items = [
@@ -14,6 +14,7 @@ const items = [
   {
     label: "Sign Up",
     key: "signup",
+    className:"d-none",
     icon: <AppstoreOutlined />,
   },
   {

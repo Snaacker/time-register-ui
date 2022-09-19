@@ -1,5 +1,5 @@
 
-import NavBar from "./components/nav-bar";
+import NavBar from "./components/nav/nav-bar";
 import Login from "../pages/login";
 
 function App() {

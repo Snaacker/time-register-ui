@@ -1,5 +1,3 @@
-// test only : insert in  http header
-// Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MTczMzYwNCwiaWF0IjoxNjYxNzE1NjA0fQ.mjov2frE22V1DdyK5BsVCfRsp23icbVAASzXxC43Y8YNYK94WUezuwzU67lciWm2VL6PLBQ6iPQiQcjO6Y2dHw
 import axios from "axios";
 import { getLocalApiUrl } from "../api-manager/url-management";
 import { User } from "../type/User";
@@ -56,7 +54,7 @@ export async function createUser(user: User) {
         headers: {
           Accept: "application/json",
           'Access-Control-Allow-Origin': '*',
-          Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzIwNzI4NSwiaWF0IjoxNjYzMTg5Mjg1fQ.LMLMi5G1YeMV-SE7idu5dC-Hjrrsfqt3M4maeiaPaDfNflrkuOr6KJmdefvzcl5j3mUjRIPNm0_NCn9o8iblPA"
+          Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI4Nzg0NiwiaWF0IjoxNjYzMjY5ODQ2fQ.-q2EqNYmS8aNKAAxXV07aqWQz8LHpuniRurHuYOt0zS1t1GgnlLD-P8SVrA9E0vnTHYSsqeHW6mZf5SFbAHzrQ"
         },
       }
     );
