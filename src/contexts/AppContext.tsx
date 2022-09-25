@@ -6,12 +6,12 @@ import {
     useState,
   } from "react";
   
-  export function createCtx<A>(defaultValue: A) {
+  export function createCtx<A>(defaultValue: A, stateName:string, updateFunctionName:any) {
     type UpdateType = Dispatch<SetStateAction<typeof defaultValue>>;
     const defaultUpdate: UpdateType = () => defaultValue;
     const ctx = createContext({
-      state: defaultValue,
-      update: defaultUpdate,
+      [stateName]: defaultValue,
+      [updateFunctionName]: defaultUpdate,
     });
   
     function Provider(props: PropsWithChildren<{}>) {

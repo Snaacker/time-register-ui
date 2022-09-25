@@ -1,7 +1,9 @@
 import { AppstoreOutlined, HomeOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { UserContext } from "../../../pages/appWrapper";
+import { User } from "../../type/User";
 
 
 const items = [
@@ -40,8 +42,10 @@ const items = [
 
 const NavBar = () => {
   const [current, setCurrent] = useState("home");
+  const { state, update } = useContext(UserContext)
   const router = useRouter();
   const onClick = (e: any) => {
+    console.log(state)
     setCurrent(e.key);
     switch (e.key) {
       case "home":
@@ -67,12 +71,20 @@ const NavBar = () => {
     }
   };
 
+  useEffect(() => {
+   console.log(state)
+  }, [ state])
+
   return (
     <Menu
       onClick={onClick}
       selectedKeys={[current]}
       mode="horizontal"
-      items={items}
+      items={state.isAuthenticated ? items:  [{
+        label: "Home",
+        key: "home",
+        icon: <HomeOutlined />,
+      }]}
     />
   );
 };

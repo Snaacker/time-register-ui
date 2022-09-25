@@ -2,7 +2,6 @@ import { AppstoreOutlined, HomeOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { UserContext } from "../../contexts/userContext";
 
 
 const items = [
@@ -40,11 +39,10 @@ const items = [
 ];
 
 const NavBar = () => {
-  const userContext = UserContext;
+
   const [current, setCurrent] = useState("home");
   const router = useRouter();
   const onClick = (e: any) => {
-    console.log(userContext)
     setCurrent(e.key);
     switch (e.key) {
       case "home":

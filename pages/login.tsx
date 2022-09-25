@@ -2,36 +2,37 @@ import React, { useContext } from "react";
 import { Button, Checkbox, Form, Input, Alert } from "antd";
 import Card from "antd/lib/card/Card";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-
+import { useRouter } from "next/router";
 import { User } from "../src/type/User";
-import { UserContext } from "./_app";
+import { UserContext } from "./appWrapper";
 import { useEffect } from "react";
 import { useState } from "react";
 
 function Login() {
   const { state, update } = useContext(UserContext)
-  const [isUserAuthenticated, updateUserAuthStatus] = useState<Boolean>(false)
-  const [isUserCredentialInvalid, updateUserCredentialStatus] = useState<Boolean>(false)
+  const { state2, update3 } = useContext(UserContext)
+
+  const [isUserCredentialInvalid, updateUserCredentialStatus] = useState<Boolean>(true)
+  const router = useRouter();
   const onFinish = async (input: { username: String, password: String }) => {
 
     if (input.username === "test" && input.password === "test") {
-      let _user: User = { id: "12", roleName: "ADMIN", userName: input.username }
+      let _user: User = { id: "12", roleName: "ADMIN", userName: input.username, isAuthenticated: true }
       update(_user)
       updateUserCredentialStatus(false)
-      updateUserAuthStatus(true)
     } else {
-      updateUserAuthStatus(false)
       updateUserCredentialStatus(true)
     }
-
 
     console.log("Success:", input);
   };
 
   useEffect(() => {
-    console.log("useEffect")
+    if (!isUserCredentialInvalid) {
+      router.push("user-profile")
+    }
     console.log(state)
-  }, [state])
+  }, [isUserCredentialInvalid, state])
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);

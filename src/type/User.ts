@@ -1,4 +1,8 @@
-export type User = {
+export interface UserAuthStatus {
+  isAuthenticated?: Boolean
+}
+
+export interface User extends UserAuthStatus {
   id: String;
   accountId?: String;
   address?: String;
