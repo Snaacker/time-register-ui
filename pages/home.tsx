@@ -1,9 +1,15 @@
-function App() {
+import { useContext } from "react";
+import { UserContext } from "./appWrapper";
+
+function Home() {
+
+  const { state, update } = useContext(UserContext)
+
   return (
-    <div>
-        HOME 
+    <div className="row pt-5">
+        Hallo {state.userName} 
     </div>
   );
 }
 
-export default App;
+export default Home;

@@ -80,6 +80,9 @@ const NavBar = () => {
       onClick={onClick}
       selectedKeys={[current]}
       mode="horizontal"
+      // show only dashboard, user profile when user.role = EMPLOYEE
+      //  show only dashboard, user profile, create restaurant, create user, create schedule when user.role = MANAGER
+      // show all when user.role = ADMIN
       items={state.isAuthenticated ? items:  [{
         label: "Home",
         key: "home",

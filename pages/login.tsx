@@ -10,39 +10,40 @@ import { useState } from "react";
 
 function Login() {
   const { state, update } = useContext(UserContext)
-  const { state2, update3 } = useContext(UserContext)
-
-  const [isUserCredentialInvalid, updateUserCredentialStatus] = useState<Boolean>(true)
+  // 0 = Init , 1 = Failed , 2 = Success 
+  const [userAuthStatus, setUserAuthStatus] = useState<Number>(0)
   const router = useRouter();
   const onFinish = async (input: { username: String, password: String }) => {
 
     if (input.username === "test" && input.password === "test") {
-      let _user: User = { id: "12", roleName: "ADMIN", userName: input.username, isAuthenticated: true }
+      let _user: User = { id: "12", role_name: "ADMIN", user_name: input.username, isAuthenticated: true }
       update(_user)
-      updateUserCredentialStatus(false)
+      setUserAuthStatus(2)
     } else {
-      updateUserCredentialStatus(true)
+      setUserAuthStatus(1)
     }
-
     console.log("Success:", input);
   };
 
   useEffect(() => {
-    if (!isUserCredentialInvalid) {
-      router.push("user-profile")
+    if (state.isAuthenticated) {
+      router.push("home")
     }
-    console.log(state)
-  }, [isUserCredentialInvalid, state])
+  }, [state])
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
 
+  const onLoginFailed = () => {
+
+  }
+
   return (
     <div className="vh-100 row justify-content-center">
       <div className=" col-lg-6 col-md-8 col-sm-10 col-xs-12 align-self-center">
         <Card title="Login" >
-          {isUserCredentialInvalid ?
+          {userAuthStatus === 1 ?
             <div className="pb-3">
               <Alert message="Username or password is incorrect." type="error" />
             </div> : null
