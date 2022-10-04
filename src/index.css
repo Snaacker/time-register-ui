@@ -22,3 +22,7 @@ code {
 .login-form-forgot {
   float: right;
 }
+
+.w-user-profile{
+  width: 120px;
+}

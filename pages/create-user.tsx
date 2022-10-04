@@ -31,7 +31,7 @@ function CreateUser() {
           >
             <Form.Item
               label="User role"
-              name="roleName"
+              name="role_name"
               rules={[
                 { required: true, message: "Please input your role!" },
               ]}
@@ -44,7 +44,7 @@ function CreateUser() {
             </Form.Item>
             <Form.Item
               label="First name"
-              name="firstName"
+              name="first_name"
               rules={[
                 { required: true, message: "Please input your first name!" },
               ]}
@@ -53,7 +53,7 @@ function CreateUser() {
             </Form.Item>
             <Form.Item
               label="Last name"
-              name="lastName"
+              name="last_name"
               rules={[
                 { required: true, message: "Please input your last name!" },
               ]}
@@ -62,7 +62,7 @@ function CreateUser() {
             </Form.Item>
             <Form.Item
               label="Username"
-              name="userName"
+              name="user_name"
               rules={[
                 { required: true, message: "Please input your username!" },
               ]}
@@ -88,7 +88,7 @@ function CreateUser() {
             </Form.Item>
             <Form.Item
               label="Phone number"
-              name="phoneNumber"
+              name="phone_number"
               rules={[
                 { required: true, message: "Please input your phone number" },
               ]}

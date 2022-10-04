@@ -38,6 +38,7 @@ export async function getUserById(id: String) {
 }
 
 export async function createUser(user: User) {
+  console.log(user.role_name)
   try {
     const { data, status } = await axios.put<User>(
       getLocalApiUrl() + "user",
