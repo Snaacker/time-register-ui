@@ -7,7 +7,7 @@ import AppWrapper from "./appWrapper";
 export default function MyApp({ Component, pageProps }) {
   return (
     <AppWrapper>
-      <div className="container">
+      <div className="container-fluid">
         <Component {...pageProps} />
       </div>
     </AppWrapper>

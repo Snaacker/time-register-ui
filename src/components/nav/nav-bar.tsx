@@ -19,11 +19,6 @@ const mainNavBar = [
     icon: <AppstoreOutlined />,
   },
   {
-    label: "Create User",
-    key: "create-user",
-    icon: <AppstoreOutlined />,
-  },
-  {
     label: "Create Restaurant",
     key: "create-restaurant",
     icon: <AppstoreOutlined />,
@@ -54,9 +49,6 @@ const NavBar = () => {
         break;
       case "signup":
         router.push("signup");
-        break;
-      case "create-user":
-        router.push("create-user");
         break;
       case "create-restaurant":
         router.push("create-restaurant");

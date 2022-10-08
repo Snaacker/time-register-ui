@@ -1,26 +1,15 @@
 import { render } from '@testing-library/react';
-import { Avatar, List } from 'antd';
+import { UserAddOutlined } from '@ant-design/icons';
+import { Avatar, Button, List, PageHeader } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getUsers } from '../src/api-manager/user';
 import { User } from '../src/type/User';
+import { useRouter } from "next/router";
 
-const data = [
-  {
-    title: 'Ant Design Title 1',
-  },
-  {
-    title: 'Ant Design Title 2',
-  },
-  {
-    title: 'Ant Design Title 3',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
-];
+
 
 function UserManagement() {
-
+  const router = useRouter()
   const [userList, setUserList] = useState<User[]>()
 
   const fetchUserList = async () => {
@@ -38,19 +27,28 @@ function UserManagement() {
 
 
   return (
-    <List
-      itemLayout="horizontal"
-      dataSource={userList}
-      renderItem={user => (
-        <List.Item>
-          <List.Item.Meta
-            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-            title={<p>{user.first_name} {user.last_name}</p>}
-            description={user.role_name}
-          />
-        </List.Item>
-      )}
-    />
+    <div className='row justify-content-center'>
+      <PageHeader className="site-page-header" title="User Management" extra={[
+         <Button key="1" type='primary' icon={<UserAddOutlined/>} onClick={()=> router.push("/create-user")}>Add User</Button>
+      ]} />
+      <div className=" col-lg-4 col-md-6 col-sm-10 col-xs-12 align-self-center">
+        <List
+          itemLayout="horizontal"
+          dataSource={userList}
+          renderItem={user => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                title={<a onClick={() => router.push("create-user")}>{user.first_name} {user.last_name}</a>}
+                description={user.role_name}
+              />
+            </List.Item>
+          )}
+        />
+      </div>
+
+    </div>
+
   )
 }
 

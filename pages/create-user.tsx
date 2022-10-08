@@ -1,15 +1,28 @@
-import React from "react";
-import { Button, Form, Input, Select } from "antd";
+import React, { useState } from "react";
+import { Button, Form, Input, Select, PageHeader } from "antd";
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import Card from "antd/lib/card/Card";
 import { User } from "../src/type/User";
 import { createUser } from "../src/api-manager/user";
+import { useRouter } from "next/router";
 
 function CreateUser() {
   const { Option } = Select;
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const onFinish = async (values: User) => {
+    try {
+      setLoading(true)
+      const createUserResponse = await createUser(values)
+      router.push("/user-management")
+      console.log(createUserResponse)
+      if (createUserResponse !== undefined) {
+        setLoading(false)
+      }
+    } catch (error) {
+      setLoading(false)
+    }
 
-  const onFinish = (values: User) => {
-    createUser(values)
-    console.log("Success:", values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -17,8 +30,9 @@ function CreateUser() {
   };
 
   return (
-    <div className="vh-100 row justify-content-center">
-      <div className=" col-lg-6 col-md-8 col-sm-10 col-xs-12 align-self-center">
+    <div className=" row justify-content-center">
+      <PageHeader className="site-page-header" title="Create User" onBack={() => router.back()} />
+      <div className=" col-lg-4 col-md-6 col-sm-10 col-xs-12 align-self-center">
         <Card title="Create a new user">
           <Form
             name="basic"
@@ -103,7 +117,7 @@ function CreateUser() {
               <Input type={"email"} />
             </Form.Item>
             <Form.Item className="float-right">
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={loading}>
                 Submit
               </Button>
             </Form.Item>

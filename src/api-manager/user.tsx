@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getLocalApiUrl, getRequestHeader } from "./request-manager";
+import { getLocalApiUrl, getRequestHeader } from "./request-helper";
 import { User } from "../type/User";
 
 export async function getUsers() {
@@ -60,6 +60,7 @@ export async function createUser(user: User) {
 
     console.log("response status is: ", status);
     console.log(data);
+    return status
   } catch (error) {
     console.log(error);
   }
