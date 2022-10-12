@@ -29,18 +29,11 @@ function Login() {
     if (state.isAuthenticated) {
       router.push("home")
     }
-  }, [state])
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  const onLoginFailed = () => {
-
-  }
+  }, [state, userAuthStatus])
 
   return (
     <div className="vh-100 row justify-content-center">
+
       <div className=" col-lg-4 col-md-6 col-sm-10 col-xs-12 align-self-center">
         <Card title="Login" >
           {userAuthStatus === 1 ?
@@ -81,10 +74,6 @@ function Login() {
               <Form.Item name="remember" valuePropName="checked" noStyle>
                 <Checkbox>Remember me</Checkbox>
               </Form.Item>
-
-              {/* <a aria-disabled="true" className="login-form-forgot" href="">
-                Forgot password
-              </a> */}
             </Form.Item>
 
             <Form.Item>
@@ -100,6 +89,8 @@ function Login() {
           </Form>
         </Card>
       </div>
+
+
     </div>
   );
 }

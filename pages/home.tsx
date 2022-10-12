@@ -7,7 +7,7 @@ function Home() {
 
   return (
     <div className="row pt-5">
-        Hallo {state.userName} 
+        Hallo {state.user_name} 
     </div>
   );
 }

@@ -29,7 +29,7 @@ function UserManagement() {
   return (
     <div className='row justify-content-center'>
       <PageHeader className="site-page-header" title="User Management" extra={[
-         <Button key="1" type='primary' icon={<UserAddOutlined/>} onClick={()=> router.push("/create-user")}>Add User</Button>
+        <Button key="1" type='primary' icon={<UserAddOutlined />} onClick={() => router.push("/create-user")}>Add User</Button>
       ]} />
       <div className=" col-lg-4 col-md-6 col-sm-10 col-xs-12 align-self-center">
         <List
@@ -39,7 +39,7 @@ function UserManagement() {
             <List.Item>
               <List.Item.Meta
                 avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                title={<a onClick={() => router.push("create-user")}>{user.first_name} {user.last_name}</a>}
+                title={<a onClick={() => router.push("user-profile/?userId=" + user.id)}>{user.first_name} {user.last_name}</a>}
                 description={user.role_name}
               />
             </List.Item>

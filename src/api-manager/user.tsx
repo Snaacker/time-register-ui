@@ -22,16 +22,15 @@ export async function getUsers() {
 export async function getUserById(id: String) {
   try {
     const { data, status } = await axios.get<User>(
-      getLocalApiUrl() + "user" + id,
+      getLocalApiUrl() + "user/" + id,
       {
-        headers: {
-          Accept: "application/json",
-        },
+        headers: getRequestHeader(),
       }
     );
 
     console.log("response status is: ", status);
     console.log(data);
+    return data
   } catch (error) {
     console.log(error);
   }

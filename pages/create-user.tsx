@@ -33,7 +33,7 @@ function CreateUser() {
     <div className=" row justify-content-center">
       <PageHeader className="site-page-header" title="Create User" onBack={() => router.back()} />
       <div className=" col-lg-4 col-md-6 col-sm-10 col-xs-12 align-self-center">
-        <Card title="Create a new user">
+        <Card >
           <Form
             name="basic"
             initialValues={{ remember: true }}

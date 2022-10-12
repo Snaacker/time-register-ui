@@ -1,107 +1,63 @@
-import { Avatar, Button, Form, Input, Select } from 'antd';
+import { Avatar, Button, Descriptions, Form, Input, PageHeader, Select, Tabs } from 'antd';
 import Card from "antd/lib/card/Card";
-import React from 'react';
-import { AntDesignOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { EditOutlined, UserDeleteOutlined } from '@ant-design/icons';
+import { useRouter } from "next/router";
+import { getUserById } from '../src/api-manager/user';
+import { User } from '../src/type/User';
+import Paragraph from 'antd/lib/typography/Paragraph';
 
 
-const UserProfile = () => {
+function UserProfile() {
   const { Option } = Select;
+  const router = useRouter()
+  const { userId } = router.query
+  const [user, setUser] = useState<User>()
+
+  async function fetchUserData() {
+    let user = await getUserById(userId)
+    setUser(user)
+  }
+
+  useEffect(() => {
+    console.log(userId)
+    fetchUserData()
+  }, [userId])
+
   return (
-    <div className='row pt-5 justify-content-center'>
-
-      <div className='col-lg-8 col-md-8 col-sm-10 col-xs-12 center-element pb-5'>
-        <Avatar
-          size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-          icon={<AntDesignOutlined />}
-          className=''
-        />
-      </div>
-
-
-      <div className=" col-lg-6 col-md-8 col-sm-10 col-xs-12 align-self-center">
-        <Card title="USER NAME - LASTNAME">
-          <Form
-            name="basic"
-            initialValues={{ remember: true }}
-            // onFinish={onFinish}
-            // onFinishFailed={onFinishFailed}
-            autoComplete="off"
-            labelCol={{ span: 6 }}
-            wrapperCol={{ span: 16 }}
-          >
-            <Form.Item
-              label="User role"
-              name="roleName"
-              rules={[
-                { required: true, message: "Please input your role!" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="First name"
-              name="firstName"
-              rules={[
-                { required: true, message: "Please input your first name!" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Last name"
-              name="lastName"
-              rules={[
-                { required: true, message: "Please input your last name!" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Username"
-              name="userName"
-              rules={[
-                { required: true, message: "Please input your username!" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                { required: true, message: "Please input your password!" },
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-            <Form.Item
-              label="Address"
-              name="address"
-              rules={[{ required: true, message: "Please input your address" }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Phone number"
-              name="phoneNumber"
-              rules={[
-                { required: true, message: "Please input your phone number" },
-              ]}
-            >
-              <Input type={"number"} />
-            </Form.Item>
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[{ required: true, message: "Please input your Email" }]}
-            >
-              <Input type={"email"} />
-            </Form.Item>
-          </Form>
-        </Card>
-      </div>
+    <div>
+      {user !== undefined ?
+        <div className='row justify-content-center'>
+          <PageHeader className="site-page-header" title={user.first_name + " " + user.last_name} onBack={() => router.back()} avatar={{ size:'large',src: "https://joeschmoe.io/api/v1/random" }} subTitle={user.role_name}
+            extra={[
+              <Button key="1" danger icon={<UserDeleteOutlined />} onClick={() => router.push("/create-user")}>Delete User</Button>,
+              <Button key="2" type='primary' icon={<EditOutlined />} onClick={() => router.push("/create-user")}>Edit User</Button>
+            ]}>
+            <Paragraph>
+              Employees of the month !
+            </Paragraph>
+            <Descriptions size="middle" column={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }}>
+              <Descriptions.Item label="Phone Number">{user.phone_number}</Descriptions.Item>
+              <Descriptions.Item label="Address">{user.address}</Descriptions.Item>
+            </Descriptions>
+          </PageHeader>
+          <div className=" col-lg-6 col-md-8 col-sm-10 col-xs-12 align-self-center">
+            <Tabs defaultActiveKey="1">
+              <Tabs.TabPane tab="Tab 1" key="1">
+                Content of Tab Pane 1
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="Tab 2" key="2">
+                Content of Tab Pane 2
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="Tab 3" key="3">
+                Content of Tab Pane 3
+              </Tabs.TabPane>
+            </Tabs>
+          </div>
+        </div>
+        : null}
     </div>
+
   )
 }
 

@@ -6,6 +6,6 @@ export function getRequestHeader() {
     return {
         Accept: "application/json",
         'Access-Control-Allow-Origin': '*',
-        Authorization: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2NTI3NDE3MiwiaWF0IjoxNjY1MjU2MTcyfQ.RXRIdT6zYzC5e1Dhlo5MEu-BK9BfNxjlR22qgeX3d3ms8Pn861P8M5bnihwO4pOVLRpBi9kqszGwic2vsjmdyw"
+        Authorization: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2NTYyMTgwOSwiaWF0IjoxNjY1NjAzODA5fQ.IFpfEHOcb83AiNO5qWYC32IHnDyhBbhSmrAwHSftCfdXNY2F9F85yNdN_9dtjI6XODNt1w6oxVOAqSIs_-WeTA"
     }
 }
