@@ -48,7 +48,7 @@ export async function createUser(user: User) {
         first_name: user.first_name,
         last_name: user.last_name,
         password: user.password,
-        phone_number: user.password,
+        phone_number: user.phone_number,
         role_name: user.role_name,
         user_name: user.user_name,
       },
@@ -65,10 +65,10 @@ export async function createUser(user: User) {
   }
 }
 
-export async function editUser(user: User) {
+export async function editUser(userId:String, user: User) {
   try {
     const { data, status } = await axios.post<User>(
-      getLocalApiUrl() + "user/" + user.id,
+      getLocalApiUrl() + "user/" + userId,
       {
         account_id: user.account_id,
         address: user.address,
@@ -76,14 +76,12 @@ export async function editUser(user: User) {
         first_name: user.first_name,
         last_name: user.last_name,
         password: user.password,
-        phone_number: user.password,
+        phone_number: user.phone_number,
         role_name: user.role_name,
         user_name: user.user_name,
       },
       {
-        headers: {
-          Accept: "application/json",
-        },
+        headers: getRequestHeader(),
       }
     );
 
@@ -94,19 +92,18 @@ export async function editUser(user: User) {
   }
 }
 
-export async function deleteUser(user: User) {
+export async function deleteUser(userId: String) {
   try {
     const { data, status } = await axios.delete<User>(
-      getLocalApiUrl() + "user/" + user.id,
+      getLocalApiUrl() + "user/" + userId,
       {
-        headers: {
-          Accept: "application/json",
-        },
+        headers: getRequestHeader(),
       }
     );
 
     console.log("response status is: ", status);
     console.log(data);
+    return status
   } catch (error) {
     console.log(error);
   }

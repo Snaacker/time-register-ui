@@ -1,9 +1,9 @@
-import { Avatar, Button, Descriptions, Form, Input, PageHeader, Select, Tabs } from 'antd';
+import { Avatar, Button, Descriptions, Form, Input, message, notification, PageHeader, Popconfirm, Select, Tabs } from 'antd';
 import Card from "antd/lib/card/Card";
 import React, { useEffect, useState } from 'react';
 import { EditOutlined, UserDeleteOutlined } from '@ant-design/icons';
 import { useRouter } from "next/router";
-import { getUserById } from '../src/api-manager/user';
+import { deleteUser, getUserById } from '../src/api-manager/user';
 import { User } from '../src/type/User';
 import Paragraph from 'antd/lib/typography/Paragraph';
 
@@ -19,6 +19,15 @@ function UserProfile() {
     setUser(user)
   }
 
+  const openMessage = () => {
+    message.success('User has been deleted successfully ');
+  };
+
+  async function callDeleteUser(userId: String) {
+    await deleteUser(userId)
+    openMessage()
+    router.back()
+  }
   useEffect(() => {
     console.log(userId)
     fetchUserData()
@@ -28,10 +37,18 @@ function UserProfile() {
     <div>
       {user !== undefined ?
         <div className='row justify-content-center'>
-          <PageHeader className="site-page-header" title={user.first_name + " " + user.last_name} onBack={() => router.back()} avatar={{ size:'large',src: "https://joeschmoe.io/api/v1/random" }} subTitle={user.role_name}
+          <PageHeader className="site-page-header" title={user.first_name + " " + user.last_name} onBack={() => router.back()} avatar={{ size: 'large', src: "https://joeschmoe.io/api/v1/random" }} subTitle={user.role_name}
             extra={[
-              <Button key="1" danger icon={<UserDeleteOutlined />} onClick={() => router.push("/create-user")}>Delete User</Button>,
-              <Button key="2" type='primary' icon={<EditOutlined />} onClick={() => router.push("/create-user")}>Edit User</Button>
+              <Popconfirm
+                placement="bottom"
+                title="Are you sure about it ?"
+                onConfirm={() => callDeleteUser(userId)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button key="1" danger icon={<UserDeleteOutlined />} >Delete User</Button>
+              </Popconfirm>,
+              <Button key="2" type='primary' icon={<EditOutlined />} onClick={() => router.push({ pathname: "/edit-user", query: { user: JSON.stringify(user) } })}>Edit User</Button>
             ]}>
             <Paragraph>
               Employees of the month !
