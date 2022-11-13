@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Input, Select, PageHeader } from "antd";
-import { ArrowLeftOutlined } from '@ant-design/icons';
 import Card from "antd/lib/card/Card";
 import { User } from "../src/type/User";
-import { createUser, editUser } from "../src/api-manager/user";
+import { editUser } from "../src/api-manager/user";
 import { useRouter } from "next/router";
 
 function EditUser() {
@@ -27,7 +26,6 @@ function EditUser() {
     } catch (error) {
       setLoading(false)
     }
-
   };
 
   const onFinishFailed = (errorInfo: any) => {

@@ -7,6 +7,7 @@ import { User } from "../src/type/User";
 import { UserContext } from "./appWrapper";
 import { useEffect } from "react";
 import { useState } from "react";
+import { saveAuthorizationToken } from "../src/api-manager/authorization";
 
 function Login() {
   const { state, update } = useContext(UserContext)
@@ -17,6 +18,10 @@ function Login() {
 
     if (input.username === "test" && input.password === "test") {
       let _user: User = { id: "12", role_name: "ADMIN", user_name: input.username, isAuthenticated: true }
+
+      // TODO: get user auth-token
+      saveAuthorizationToken("YWRtaW46cXdlcnR5")
+
       update(_user)
       setUserAuthStatus(2)
     } else {

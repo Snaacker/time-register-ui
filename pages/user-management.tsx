@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react';
 import { UserAddOutlined } from '@ant-design/icons';
 import { Avatar, Button, List, PageHeader } from 'antd';
 import React, { useEffect, useState } from 'react';
