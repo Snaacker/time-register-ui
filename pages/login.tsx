@@ -7,7 +7,7 @@ import { User } from "../src/type/User";
 import { UserContext } from "./appWrapper";
 import { useEffect } from "react";
 import { useState } from "react";
-import { saveAuthorizationToken } from "../src/api-manager/authorization";
+import { encyptLoginData, handlerUserAuthRequest } from "../src/services/authentification";
 
 function Login() {
   const { state, update } = useContext(UserContext)
@@ -16,18 +16,14 @@ function Login() {
   const router = useRouter();
   const onFinish = async (input: { username: String, password: String }) => {
 
-    if (input.username === "test" && input.password === "test") {
+    if (await handlerUserAuthRequest(encyptLoginData(input.username + ":" + input.password))) {
+      // TODO : get user props like id, role etc... 
       let _user: User = { id: "12", role_name: "ADMIN", user_name: input.username, isAuthenticated: true }
-
-      // TODO: get user auth-token
-      saveAuthorizationToken("YWRtaW46cXdlcnR5")
-
       update(_user)
       setUserAuthStatus(2)
     } else {
       setUserAuthStatus(1)
     }
-    console.log("Success:", input);
   };
 
   useEffect(() => {

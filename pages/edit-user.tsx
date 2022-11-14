@@ -88,7 +88,7 @@ function EditUser() {
             </Form.Item>
             <Form.Item
               label="Username"
-              name="user_name"
+              name="username"
               rules={[
                 { required: true, message: "Please input your username!" },
               ]}

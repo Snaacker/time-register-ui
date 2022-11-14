@@ -2,8 +2,7 @@ import axios from "axios";
 import { createCookie } from "./cookie-helper";
 import { getLocalApiUrl } from "./request-helper";
 
-export async function saveAuthorizationToken(userAuthorization: string) {
-    console.log(userAuthorization)
+export async function getAuthToken(userAuthorization: string) {
     try {
         axios.defaults.headers.common['Authorization'] = userAuthorization
         const { data, status } = await axios.post<string>(
@@ -16,10 +15,8 @@ export async function saveAuthorizationToken(userAuthorization: string) {
             }
 
         );
-        console.log(data)
-        console.log(status)
-        createCookie("user", data.toString())
+        return { authToken: data, responseStatus: status }
     } catch (error) {
-        console.log(error)
+        return { authToken: null, responseStatus: status, error: error }
     }
 }
