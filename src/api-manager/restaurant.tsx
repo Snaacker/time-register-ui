@@ -1,19 +1,20 @@
-// test only : insert in  http header
-// Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MTczMzYwNCwiaWF0IjoxNjYxNzE1NjA0fQ.mjov2frE22V1DdyK5BsVCfRsp23icbVAASzXxC43Y8YNYK94WUezuwzU67lciWm2VL6PLBQ6iPQiQcjO6Y2dHw
 import axios from "axios";
-import { getLocalApiUrl } from "./request-helper";
+import {getLocalApiUrl, getRequestHeader} from "./request-helper";
 import { Restaurant } from "../type/Restaurant";
 
 export async function getRestaurants() {
   try {
-    const { data, status } = await axios.get<Restaurant>(getLocalApiUrl() + "user", {
-      headers: {
-        Accept: "application/json",
+    const { data, status } = await axios.get<Restaurant>(getLocalApiUrl() + "restaurant", {
+      params:{
+        startPage:0,
+        pageSize:10
       },
+      headers: getRequestHeader(),
     });
 
     console.log("response status is: ", status);
-    console.log(data);
+    return data.genericObject
+
   } catch (error) {
     console.log(error);
   }

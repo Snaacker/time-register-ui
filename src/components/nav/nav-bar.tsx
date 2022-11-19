@@ -19,8 +19,8 @@ const mainNavBar = [
     icon: <AppstoreOutlined />,
   },
   {
-    label: "Create Restaurant",
-    key: "create-restaurant",
+    label: "Restaurant Management",
+    key: "restaurant-management",
     icon: <AppstoreOutlined />,
   },
   {
@@ -50,8 +50,8 @@ const NavBar = () => {
       case "signup":
         router.push("signup");
         break;
-      case "create-restaurant":
-        router.push("create-restaurant");
+      case "restaurant-management":
+        router.push("restaurant-management");
         break;
       case "user-management":
         router.push("user-management");
