@@ -64,19 +64,53 @@ export async function editRestaurant(restaurant: Restaurant) {
   }
 }
 
-export async function deleteRestaurant(restaurant: Restaurant) {
+// export async function deleteRestaurant(restaurant: Restaurant) {
+//   try {
+//     const { data, status } = await axios.delete<Restaurant>(
+//       getLocalApiUrl() + "user/" + restaurant.id,
+//       {
+//         headers: {
+//           Accept: "application/json",
+//         },
+//       }
+//     );
+//
+//     console.log("response status is: ", status);
+//     console.log(data);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+export async function getRestaurantById(restaurantId: String) {
   try {
-    const { data, status } = await axios.delete<Restaurant>(
-      getLocalApiUrl() + "user/" + restaurant.id,
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
+    const { data, status } = await axios.get<Restaurant>(
+        getLocalApiUrl() + "restaurant/" + restaurantId,
+        {
+          headers: getRequestHeader(),
+        }
     );
 
     console.log("response status is: ", status);
     console.log(data);
+    return data
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deleteRestaurant(restaurantId: String) {
+  try {
+    const { data, status } = await axios.delete<Restaurant>(
+        getLocalApiUrl() + "restaurant/" + restaurantId,
+        {
+          headers: getRequestHeader(),
+        }
+    );
+
+    console.log("response status is: ", status);
+    console.log(data);
+    return status
   } catch (error) {
     console.log(error);
   }

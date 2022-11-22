@@ -1,5 +1,7 @@
 export type Restaurant = {
-  id: String;
+  restaurant_id: String;
   name: String;
   address: String;
+  manager: String;
+  phone_number: String;
 };

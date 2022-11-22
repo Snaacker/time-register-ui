@@ -3,7 +3,6 @@ import { Avatar, Menu, Image, Dropdown, Button, Space } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "../../../pages/appWrapper";
-import { User } from "../../type/User";
 
 
 const mainNavBar = [
@@ -26,12 +25,6 @@ const mainNavBar = [
   {
     label: "User Management",
     key: "user-management",
-    icon: <AppstoreOutlined />,
-  },
-  {
-    label: "User Profile",
-    key: "user-profile",
-    className: "float-right",
     icon: <AppstoreOutlined />,
   }
 ];
@@ -64,6 +57,23 @@ const NavBar = () => {
     }
   };
 
+  const profileOnClick = (e: any) => {
+    console.log(state)
+    switch (e.key) {
+      case "my-profile":
+        router.push("my-profile");
+        break;
+      case "settings":
+        router.push("settings");
+        break;
+      case "logout":
+        router.push("logout");
+        break;
+      default:
+        break;
+    }
+  };
+
   useEffect(() => {
     console.log(state)
   }, [state])
@@ -72,19 +82,19 @@ const NavBar = () => {
     <Menu
       items={[
         {
-          label: <a href="https://www.antgroup.com">1st menu item</a>,
-          key: '0',
+          label: "My Profile",
+          key: 'my-profile',
         },
         {
-          label: <a href="https://www.aliyun.com">2nd menu item</a>,
-          key: '1',
+          label: "Settings",
+          key: 'settings',
         },
         {
           type: 'divider',
         },
         {
-          label: '3rd menu item',
-          key: '3',
+          label: "Log out",
+          key: 'logout',
         },
       ]}
     />
@@ -98,9 +108,8 @@ const NavBar = () => {
       >
         <Menu.Item>
           <Dropdown overlay={userProfileMenu} trigger={['click']}>
-            <a onClick={e => e.preventDefault()}>
+            <a onClick={profileOnClick}>
               <Space>
-               
                 <UserOutlined className="fs-5"/>
                 <CaretDownOutlined/>
               </Space>

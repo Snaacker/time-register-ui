@@ -32,12 +32,12 @@ function RestaurantManagement () {
     <List
     itemLayout="horizontal"
     dataSource={restaurantList}
-    renderItem={item => (
+    renderItem={restaurant => (
       <List.Item>
         <List.Item.Meta
           avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-          title={<a href="https://ant.design">{item.name}</a>}
-          description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+          title={<a onClick={() => router.push("restaurant-detail/?restaurantId=" + restaurant.restaurant_id)}>{restaurant.name}</a>}
+          description={restaurant.name}
         />
       </List.Item>
     )}
