@@ -1,10 +1,26 @@
-import React from "react";
-import { Button, Form, Input } from "antd";
+import React, {useState} from "react";
+import {Button, Form, Input, Select} from "antd";
 import Card from "antd/lib/card/Card";
+import { createRestaurant } from "../src/api-manager/restaurant";
+import { useRouter } from "next/router";
+import {Restaurant} from "../src/type/Restaurant";
 
 function CreateRestaurant() {
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
+  const { Option } = Select;
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const onFinish = async (values: Restaurant) => {
+    try {
+      setLoading(true)
+      const createRestaurantResponse = await createRestaurant(values)
+      router.push("/restaurant-management")
+      console.log(createRestaurantResponse)
+      if (createRestaurantResponse !== undefined) {
+        setLoading(false)
+      }
+    } catch (error) {
+      setLoading(false)
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -38,9 +54,22 @@ function CreateRestaurant() {
             >
               <Input />
             </Form.Item>
-
+            <Form.Item
+                label="Email"
+                name="email"
+                rules={[{ required: true, message: "Email is required" }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+                label="Phone number"
+                name="phone_number"
+                rules={[{ required: true, message: "Phone number is required" }]}
+            >
+              <Input />
+            </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={loading}>
                 Submit
               </Button>
             </Form.Item>

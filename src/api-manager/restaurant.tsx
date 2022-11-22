@@ -1,6 +1,7 @@
 import axios from "axios";
 import {getLocalApiUrl, getRequestHeader} from "./request-helper";
 import { Restaurant } from "../type/Restaurant";
+import {User} from "../type/User";
 
 export async function getRestaurants() {
   try {
@@ -23,20 +24,21 @@ export async function getRestaurants() {
 export async function createRestaurant(restaurant: Restaurant) {
   try {
     const { data, status } = await axios.put<Restaurant>(
-      getLocalApiUrl() + "restaurant",
-      {
-        name: restaurant.name,
-        address: restaurant.address,
-      },
-      {
-        headers: {
-          Accept: "application/json",
+        getLocalApiUrl() + "restaurant",
+        {
+          name: restaurant.name,
+          email: restaurant.email,
+          address: restaurant.address,
+          phone_number: restaurant.phone_number,
         },
-      }
+        {
+          headers: getRequestHeader(),
+        }
     );
 
     console.log("response status is: ", status);
     console.log(data);
+    return status
   } catch (error) {
     console.log(error);
   }

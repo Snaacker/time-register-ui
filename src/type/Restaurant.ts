@@ -4,4 +4,5 @@ export type Restaurant = {
   address: String;
   manager: String;
   phone_number: String;
+  email: String;
 };
