@@ -77,6 +77,8 @@ function RestaurantDetail() {
             <Descriptions size="middle" column={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }}>
               <Descriptions.Item label="Phone Number">{restaurant.phone_number}</Descriptions.Item>
               <Descriptions.Item label="Address">{restaurant.address}</Descriptions.Item>
+              <Descriptions.Item label="Email">{restaurant.email}</Descriptions.Item>
+              <Descriptions.Item label="Manager">{restaurant.manager}</Descriptions.Item>
             </Descriptions>
           </PageHeader>
           <div className=" col-lg-6 col-md-8 col-sm-10 col-xs-12 align-self-center">
