@@ -1,22 +1,41 @@
-import { Avatar, Button, Descriptions, Form, Input, message, notification, PageHeader, Popconfirm, Select, Tabs } from 'antd';
+import {
+  Avatar,
+  Button,
+  Descriptions,
+  Form,
+  Input,
+  List,
+  message,
+  notification,
+  PageHeader,
+  Popconfirm,
+  Select,
+  Tabs
+} from 'antd';
 import Card from "antd/lib/card/Card";
 import React, { useEffect, useState } from 'react';
 import { EditOutlined, UserDeleteOutlined } from '@ant-design/icons';
 import { useRouter } from "next/router";
-import { deleteRestaurant, getRestaurantById } from '../src/api-manager/restaurant';
+import { deleteRestaurant, getRestaurantById, getUsersOfRestaurant } from '../src/api-manager/restaurant';
 import { Restaurant } from '../src/type/Restaurant';
 import Paragraph from 'antd/lib/typography/Paragraph';
-
+import {User} from "../src/type/User";
 
 function RestaurantDetail() {
   const { Option } = Select;
   const router = useRouter()
   const { restaurantId } = router.query
   const [restaurant, setRestaurant] = useState<Restaurant>()
+  const [userList, setUserList] = useState<User[]>()
 
   async function fetchRestaurantData() {
     let restaurant = await getRestaurantById(restaurantId)
     setRestaurant(restaurant)
+  }
+
+  async function fetchUserRestaurantData() {
+    let userList = await getUsersOfRestaurant(restaurantId)
+    setUserList(userList)
   }
 
   const openMessage = () => {
@@ -32,6 +51,10 @@ function RestaurantDetail() {
   useEffect(() => {
     console.log(restaurantId)
     fetchRestaurantData()
+  }, [restaurantId])
+
+  useEffect( () => {
+    fetchUserRestaurantData()
   }, [restaurantId])
 
   return (
@@ -57,17 +80,20 @@ function RestaurantDetail() {
             </Descriptions>
           </PageHeader>
           <div className=" col-lg-6 col-md-8 col-sm-10 col-xs-12 align-self-center">
-            <Tabs defaultActiveKey="1">
-              <Tabs.TabPane tab="Tab 1" key="1">
-                Content of Tab Pane 1
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="Tab 2" key="2">
-                Content of Tab Pane 2
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="Tab 3" key="3">
-                Content of Tab Pane 3
-              </Tabs.TabPane>
-            </Tabs>
+            <List
+                itemLayout="horizontal"
+                dataSource={userList}
+                renderItem={user => (
+                    <List.Item>
+                      <List.Item.Meta
+                          avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                          //TODO: return user id on request
+                          title={<a onClick={() => router.push("user-profile/?userId=" + user.id)}>{user.first_name} {user.last_name}</a>}
+                          description={user.role_name}
+                      />
+                    </List.Item>
+                )}
+            />
           </div>
         </div>
         : null}

@@ -117,3 +117,20 @@ export async function deleteRestaurant(restaurantId: String) {
     console.log(error);
   }
 }
+
+export async function getUsersOfRestaurant(restaurantId: string) {
+  try {
+    const { data, status } = await axios.get(getLocalApiUrl() + "restaurant/" + restaurantId + "/user", {
+      params:{
+        startPage:0,
+        pageSize:10
+      },
+      headers: getRequestHeader(),
+    });
+
+    console.log("get all user of restaurant - response status is: ", status);
+    return data.genericObject
+  } catch (error) {
+    console.log(error);
+  }
+}
